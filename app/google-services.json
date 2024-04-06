@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "839805257778",
+    "project_id": "note-app-with-firebase-armine",
+    "storage_bucket": "note-app-with-firebase-armine.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:839805257778:android:fc6242b7908dc59fa4942b",
+        "android_client_info": {
+          "package_name": "com.example.note_app_with_firebase_armine"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKklo-EeIHfjVGJ_FFLsvN1s6_EyWiMG4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
