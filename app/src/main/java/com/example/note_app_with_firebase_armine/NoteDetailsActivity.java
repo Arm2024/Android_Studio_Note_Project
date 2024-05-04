@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -17,6 +18,9 @@ public class NoteDetailsActivity extends AppCompatActivity {
 
     EditText titleEditText, contentEditText;
     ImageButton saveNoteBtn;
+    TextView pageTitleView;
+    String title,content,docId;
+    boolean isEditMode = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,22 @@ public class NoteDetailsActivity extends AppCompatActivity {
         titleEditText = findViewById(R.id.notes_title_text);
         contentEditText = findViewById(R.id.notes_content_text);
         saveNoteBtn = findViewById(R.id.save_note_btn);
+        pageTitleView = findViewById(R.id.page_title);
+
+        // Receive data
+        title = getIntent().getStringExtra("title");
+        content = getIntent().getStringExtra("content");
+        docId = getIntent().getStringExtra("docId");
+
+        // Check if it's in edit mode
+        isEditMode = docId != null && !docId.isEmpty();
+
+        titleEditText.setText(title);
+        contentEditText.setText(content);
+        if (isEditMode) {
+            pageTitleView.setText("Edit your Note");
+        }
+
 
         saveNoteBtn.setOnClickListener((v) -> saveNote());
     }
