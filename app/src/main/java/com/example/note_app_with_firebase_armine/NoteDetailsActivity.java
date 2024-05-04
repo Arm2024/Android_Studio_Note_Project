@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -40,7 +41,7 @@ public class NoteDetailsActivity extends AppCompatActivity {
         Note note = new Note();
         note.setTitle(noteTitle);
         note.setContent(noteContent);
-        note.setTimestamp(new java.sql.Timestamp(Timestamp.now().getSeconds() * 1000L));
+        note.setTimestamp(Timestamp.now());
 
 
         saveNoteToFirebase(note);
@@ -58,7 +59,12 @@ public class NoteDetailsActivity extends AppCompatActivity {
                     Utility.showToast(NoteDetailsActivity.this, "Note added successfully");
                     finish();
                 } else {
+                    // Failed to add note
                     Utility.showToast(NoteDetailsActivity.this, "Failed while adding note");
+                    // Log the error message
+                    if (task.getException() != null) {
+                        Log.e("NoteDetailsActivity", "Error adding note: " + task.getException().getMessage());
+                    }
                 }
             }
         });

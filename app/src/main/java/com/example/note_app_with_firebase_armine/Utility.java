@@ -8,7 +8,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Utility {
     static void showToast(Context context, String message){

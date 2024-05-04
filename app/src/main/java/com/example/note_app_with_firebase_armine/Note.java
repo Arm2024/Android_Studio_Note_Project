@@ -1,12 +1,14 @@
 package com.example.note_app_with_firebase_armine;
 
-import java.sql.Timestamp;
+
+
+import com.google.firebase.Timestamp;
 
 public class Note {
     String title;
     String content;
 
-    Timestamp timestamp;
+    com.google.firebase.Timestamp timestamp;
 
     public Note() {
     }

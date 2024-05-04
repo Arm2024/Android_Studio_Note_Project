@@ -9,7 +9,7 @@ import android.os.Handler; // Import Handler from android.os package
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.ktx.Firebase;
+
 
 public class SplashActivity extends AppCompatActivity {
 
