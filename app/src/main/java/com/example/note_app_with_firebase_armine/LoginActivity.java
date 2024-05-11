@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -39,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener((v)-> loginUser());
         createAccountBtnTextView.setOnClickListener((v)->startActivity(new Intent(LoginActivity.this, CreateAccountActivity.class)));
     }
+
     void loginUser(){
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
@@ -59,20 +61,26 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 changeInProgress(false);
                 if(task.isSuccessful()){
-                    //login is success
-                    if(firebaseAuth.getCurrentUser().isEmailVerified()){
-                        //go to mainActivity
-                        startActivity(new Intent(LoginActivity.this,MainActivity.class));
-                    }else{
-                        Utility.showToast(LoginActivity.this, "Email is not verified. Please verify your email.");
+                    // Login is successful
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                    if (user != null && user.isEmailVerified()) {
+                        // Go to MainActivity
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        finish(); // Finish current activity to prevent going back
+                    } else {
+                        // User is not authenticated or email is not verified
+                        showErrorMessage("User is not authenticated or email is not verified.");
                     }
-
-                }else {
-                    //login failed
-                    Utility.showToast(LoginActivity.this, task.getException().getLocalizedMessage());
+                } else {
+                    // Login failed
+                    showErrorMessage("Login failed: " + task.getException().getMessage());
                 }
             }
         });
+    }
+
+    void showErrorMessage(String message) {
+        Utility.showToast(LoginActivity.this, message);
     }
 
     void changeInProgress(boolean inProgress){
