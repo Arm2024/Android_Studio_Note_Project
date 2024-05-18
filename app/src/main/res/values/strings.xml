@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Note_app_with_Firebase_Armine</string>
+    <string name="edit_note_title">Edit your Note</string>
+
 </resources>
